@@ -1,0 +1,7 @@
+Oyuna basladiginizda oyun arayuzu ekrana gelir. 
+Arayuz uzerinden acmak istedginiz karenin koordinatlarini ekranda belirtilen formatta girmeniz gerekir.
+Oyunda 8x8'lik bir arayuze 10 adet mayin rastgele yerlestirilmistir.
+Amac bu mayinlara denk gelmeden mayinsiz tum kareleri acmaktir.
+Mayinlara denk gelirseniz oyun sonlanir.
+
+
