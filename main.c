@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <string.h>
 
 
 
@@ -10,7 +9,7 @@
 int baslama() {
 	int secim;
 	do {
-		printf("1 -> Oyuna Basla");
+		printf("\n1 -> Oyuna Basla");
 		printf("\n2 -> Nasil Oynanir"); // FILE pointer ile ekrana text dosyasini yazdir.
 		printf("\n3 -> Cikis\n");
 		printf("\nSeciminizi giriniz : ");
@@ -21,11 +20,9 @@ int baslama() {
 	
 }
 
-
 // mayýnlarý rastgele yerleþtirme
 void mayinYerlestir(int matris[8][8]){
 	//10 tane mayin yerlestir.
-	srand(time(NULL));
 	int sayac=0;
 	while(sayac<10){
 		
@@ -39,51 +36,74 @@ void mayinYerlestir(int matris[8][8]){
 			i = rand() % 8;
 			j = rand() % 8;
 		}
-		
+	}
+}
+
+int oyunBitti(int matris[8][8],char arayuzMatris[8][8]) {
+	int sayac=0;
+	
+	for(int i=0;i<8;i++){
+		for(int j=0; j<8;j++){
+			if(arayuzMatris[i][j]=='#'){
+				if(matris[i][j]==-1){
+					sayac ++;
+				}
+				
+			}
+		}
+	}
+	if (sayac==8){
+		return 0;   //oyun bitti 
+	}else{
+		return 1; //devam 
 	}
 }
 
 
 //secilen karenin komþusunu kontrol etme - mayýn yoksa kullnýcýya gösterir, 
 int cevredeMayinVarMi (int matris[8][8],char arayuzMatris[8][8],int satir, int sutun) {
-	// cevredeki 8 kareyi kontrol eden for
-	if(matris[satir-1][sutun-1]==-1){
-		//programý sonlandýr
-		printf("Mayini actiniz...");
-		return -1;
-	}else{
+	
+	if(oyunBitti(matris,arayuzMatris)==1){ // karelerin bulundugu indislerde sadece -1 varsa oyun biter aksi halde burasý çalýþýr
+	
+		if(matris[satir-1][sutun-1]==-1){
+			//programý sonlandýr
+			printf("Mayini actiniz...");
+			baslama();
+		}else{
+			
+			int mayinSayisi = 0;
+	        for (int i = satir - 2; i <= satir; i++) {
+	            for (int j = sutun - 2; j <= sutun ; j++) {
+	                if (i >= 0 && i < 8 && j >= 0 && j < 8 && matris[i][j] == -1) {
+	                	
+	                    mayinSayisi++;
+	                }
+	            }
+	        }
+	        
+	        
+	        if (mayinSayisi == 0) {
+	            arayuzMatris[satir - 1][sutun - 1] = '0';
+	
+	            for (int a = satir - 2; a <= satir ; a++) {
+	                for (int b = sutun - 2; b <= sutun; b++) {
+	                    if (a >= 0 && a < 8 && b >= 0 && b < 8 && matris[a - 1][b - 1] != -1 && arayuzMatris[a - 1][b - 1] == '#') { //girilen yerde mayýn yoksa ve açýlmamiþsa
+	                        cevredeMayinVarMi(matris, arayuzMatris, a, b);
+	                    }
+	                }
+	            }
+	        } else {
+	            arayuzMatris[satir - 1][sutun - 1] = mayinSayisi + '0';
+	        }
 		
-		int mayinSayisi = 0;
-        for (int i = satir - 1; i <= satir + 1; i++) {
-            for (int j = sutun - 1; j <= sutun + 1; j++) {
-                if (i >= 0 && i < 8 && j >= 0 && j < 8 && matris[i][j] == -1) {
-                	
-                    mayinSayisi++;
-                }
-            }
-        }
-        
-        
-        if (mayinSayisi == 0) {
-            arayuzMatris[satir - 1][sutun - 1] = '0';
-
-            for (int a = satir - 1; a <= satir + 1; a++) {
-                for (int b = sutun - 1; b <= sutun + 1; b++) {
-                    if (a >= 0 && a < 8 && b >= 0 && b < 8 && matris[a - 1][b - 1] != -1 && arayuzMatris[a - 1][b - 1] == '#') {
-                        cevredeMayinVarMi(matris, arayuzMatris, a, b);
-                    }
-                }
-            }
-        } else {
-            arayuzMatris[satir - 1][sutun - 1] = mayinSayisi + '0';
-        }
 	
-
-        return 0;
-        
+	        return 0;
+	        
+		}
+		
+	}else{
+		printf("\n Tebrikler oyun bitti!");
 	}
-	
-	
 }
 
 
@@ -91,6 +111,7 @@ int cevredeMayinVarMi (int matris[8][8],char arayuzMatris[8][8],int satir, int s
 
 int main() {
 	int secim=baslama();
+	srand(time(NULL));
 	
 	if(secim==1){
 		printf("Oyun Basladi ...\n\n");
@@ -171,7 +192,6 @@ int main() {
 	}else {
 		// programý sonlandýr
 		printf("\nOyundan cikiliyor...");
-		getch();
 	}
 		
 	return 0;
