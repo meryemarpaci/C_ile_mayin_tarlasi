@@ -4,8 +4,8 @@
 
 
 
-
-// kullanýcý menüsü tanýmlama
+// a
+// kullanï¿½cï¿½ menï¿½sï¿½ tanï¿½mlama
 int baslama() {
 	int secim;
 	do {
@@ -20,7 +20,7 @@ int baslama() {
 	
 }
 
-// mayýnlarý rastgele yerleþtirme
+// mayï¿½nlarï¿½ rastgele yerleï¿½tirme
 void mayinYerlestir(int matris[8][8]){
 	//10 tane mayin yerlestir.
 	int sayac=0;
@@ -60,13 +60,13 @@ int oyunBitti(int matris[8][8],char arayuzMatris[8][8]) {
 }
 
 
-//secilen karenin komþusunu kontrol etme - mayýn yoksa kullnýcýya gösterir, 
+//secilen karenin komï¿½usunu kontrol etme - mayï¿½n yoksa kullnï¿½cï¿½ya gï¿½sterir, 
 int cevredeMayinVarMi (int matris[8][8],char arayuzMatris[8][8],int satir, int sutun) {
 	
-	if(oyunBitti(matris,arayuzMatris)==1){ // karelerin bulundugu indislerde sadece -1 varsa oyun biter aksi halde burasý çalýþýr
+	if(oyunBitti(matris,arayuzMatris)==1){ // karelerin bulundugu indislerde sadece -1 varsa oyun biter aksi halde burasï¿½ ï¿½alï¿½ï¿½ï¿½r
 	
 		if(matris[satir-1][sutun-1]==-1){
-			//programý sonlandýr
+			//programï¿½ sonlandï¿½r
 			printf("Mayini actiniz...");
 			baslama();
 		}else{
@@ -87,7 +87,7 @@ int cevredeMayinVarMi (int matris[8][8],char arayuzMatris[8][8],int satir, int s
 	
 	            for (int a = satir - 2; a <= satir ; a++) {
 	                for (int b = sutun - 2; b <= sutun; b++) {
-	                    if (a >= 0 && a < 8 && b >= 0 && b < 8 && matris[a - 1][b - 1] != -1 && arayuzMatris[a - 1][b - 1] == '#') { //girilen yerde mayýn yoksa ve açýlmamiþsa
+	                    if (a >= 0 && a < 8 && b >= 0 && b < 8 && matris[a - 1][b - 1] != -1 && arayuzMatris[a - 1][b - 1] == '#') { //girilen yerde mayï¿½n yoksa ve aï¿½ï¿½lmamiï¿½sa
 	                        cevredeMayinVarMi(matris, arayuzMatris, a, b);
 	                    }
 	                }
@@ -115,8 +115,8 @@ int main() {
 	
 	if(secim==1){
 		printf("Oyun Basladi ...\n\n");
-		// arayüz tasarýmý 8x8
-		int matris[8][8] = {0}; //kullanýcý bunu görmeyecek, asýl matris
+		// arayï¿½z tasarï¿½mï¿½ 8x8
+		int matris[8][8] = {0}; //kullanï¿½cï¿½ bunu gï¿½rmeyecek, asï¿½l matris
 		char arayuzMatris[8][8];
 	    for (int i = 0; i < 8; i++) {
 	        for (int j = 0; j < 8; j++) {
@@ -142,7 +142,7 @@ int main() {
 		
 		while(cevredeMayinVarMi(matris,arayuzMatris,satir,sutun) != -1){
 			if (satir < 1 || satir > 8 || sutun < 1 || sutun > 8) {
-       			printf("Geçersiz giris! Lutfen tekrar deneyin.\n");
+       			printf("Geï¿½ersiz giris! Lutfen tekrar deneyin.\n");
     		}else{
     			printf("     1   2   3   4   5   6   7   8\n\n");
 				for(int i=0;i<8;i++){
@@ -161,7 +161,7 @@ int main() {
 			}
     		
     				
-			printf("Lütfen belirtilen formatta bir yer seçiniz. (satir,sutun) :\n");
+			printf("Lï¿½tfen belirtilen formatta bir yer seï¿½iniz. (satir,sutun) :\n");
 			scanf("%d,%d",&satir,&sutun);			
 				
 		}
@@ -170,8 +170,8 @@ int main() {
 		//oyunu baslat
 	}else if(secim==2){
 		printf("\n");
-		// FÝLE ile dosya göster
-		// geri basgýca donme butonu
+		// Fï¿½LE ile dosya gï¿½ster
+		// geri basgï¿½ca donme butonu
 		FILE *fp;
 		char c;
 		fp = fopen("nasiloynanir.txt","r");
@@ -180,7 +180,7 @@ int main() {
 			return 1;
 		}
 		
-		fseek(fp, 0, SEEK_SET); // Dosyanýn baþýna git
+		fseek(fp, 0, SEEK_SET); // Dosyanï¿½n baï¿½ï¿½na git
 		c=fgetc(fp);
 		while(c!=EOF){
 			printf("%c",c);
@@ -190,7 +190,7 @@ int main() {
 		fclose(fp);
 		baslama();
 	}else {
-		// programý sonlandýr
+		// programï¿½ sonlandï¿½r
 		printf("\nOyundan cikiliyor...");
 	}
 		
